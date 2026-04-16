@@ -13,6 +13,7 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<FNASettingsPropsFilePath>$(SolutionDir)FNA.Settings.props</FNASettingsPropsFilePath>
+		<PlatformTarget>x86</PlatformTarget>
 	</PropertyGroup>
 	<Import Project="$(FNASettingsPropsFilePath)" Condition="Exists('$(FNASettingsPropsFilePath)')" />
 	<Target Name="ValidatePropsFilePath" BeforeTargets="BeforeBuild">

@@ -992,7 +992,10 @@ namespace Microsoft.Xna.Framework.Graphics
 				// Resolve previous targets, if needed
 				for (int i = 0; i < renderTargetCount; i += 1)
 				{
-					FNA3D.FNA3D_ResolveTarget(GLDevice, ref nativeTargetBindings[i]);
+					if (!renderTargetBindings[i].RenderTarget.IsDisposed)
+					{
+						FNA3D.FNA3D_ResolveTarget(GLDevice, ref nativeTargetBindings[i]);
+					}
 				}
 				Array.Clear(renderTargetBindings, 0, renderTargetBindings.Length);
 				Array.Clear(nativeTargetBindings, 0, nativeTargetBindings.Length);
@@ -1039,7 +1042,10 @@ namespace Microsoft.Xna.Framework.Graphics
 					{
 						continue;
 					}
-					FNA3D.FNA3D_ResolveTarget(GLDevice, ref nativeTargetBindings[i]);
+					if (!renderTargetBindings[i].RenderTarget.IsDisposed)
+					{
+						FNA3D.FNA3D_ResolveTarget(GLDevice, ref nativeTargetBindings[i]);
+					}
 				}
 				Array.Clear(renderTargetBindings, 0, renderTargetBindings.Length);
 				Array.Copy(renderTargets, renderTargetBindings, renderTargets.Length);
