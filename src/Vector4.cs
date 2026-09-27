@@ -101,6 +101,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -216,6 +219,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="obj">The <see cref="Object"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override bool Equals(object obj)
 		{
 			return (obj is Vector4) && Equals((Vector4) obj);
@@ -226,6 +232,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="other">The <see cref="Vector4"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Equals(Vector4 other)
 		{
 			return (	X == other.X &&
@@ -238,6 +247,9 @@ namespace Microsoft.Xna.Framework
 		/// Gets the hash code of this <see cref="Vector4"/>.
 		/// </summary>
 		/// <returns>Hash code of this <see cref="Vector4"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return W.GetHashCode() + X.GetHashCode() + Y.GetHashCode() + Z.GetHashCode();
@@ -247,6 +259,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the length of this <see cref="Vector4"/>.
 		/// </summary>
 		/// <returns>The length of this <see cref="Vector4"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float Length()
 		{
 			return (float) Math.Sqrt((X * X) + (Y * Y) + (Z * Z) + (W * W));
@@ -256,6 +271,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the squared length of this <see cref="Vector4"/>.
 		/// </summary>
 		/// <returns>The squared length of this <see cref="Vector4"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float LengthSquared()
 		{
 			return (X * X) + (Y * Y) + (Z * Z) + (W * W);
@@ -278,6 +296,9 @@ namespace Microsoft.Xna.Framework
 			W *= factor;
 		}
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (
@@ -293,6 +314,9 @@ namespace Microsoft.Xna.Framework
 		#region Internal Methods
 
 		[Conditional("DEBUG")]
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal void CheckForNaNs()
 		{
 			if (	float.IsNaN(X) ||

@@ -46,6 +46,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -146,6 +149,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="obj">The <see cref="Object"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override bool Equals(object obj)
 		{
 			return (obj is Quaternion) && Equals((Quaternion) obj);
@@ -156,6 +162,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="other">The <see cref="Quaternion"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Equals(Quaternion other)
 		{
 			return (	X == other.X &&
@@ -168,6 +177,9 @@ namespace Microsoft.Xna.Framework
 		/// Gets the hash code of this <see cref="Quaternion"/>.
 		/// </summary>
 		/// <returns>Hash code of this <see cref="Quaternion"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return (
@@ -182,6 +194,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the magnitude of the quaternion components.
 		/// </summary>
 		/// <returns>The magnitude of the quaternion components.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float Length()
 		{
 			float num = (
@@ -197,6 +212,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the squared magnitude of the quaternion components.
 		/// </summary>
 		/// <returns>The squared magnitude of the quaternion components.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float LengthSquared()
 		{
 			return (
@@ -229,6 +247,9 @@ namespace Microsoft.Xna.Framework
 		/// {X:[<see cref="X"/>] Y:[<see cref="Y"/>] Z:[<see cref="Z"/>] W:[<see cref="W"/>]}
 		/// </summary>
 		/// <returns>A <see cref="String"/> representation of this <see cref="Quaternion"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (
@@ -245,6 +266,9 @@ namespace Microsoft.Xna.Framework
 		#region Internal Methods
 
 		[Conditional("DEBUG")]
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal void CheckForNaNs()
 		{
 			if (	float.IsNaN(X) ||

@@ -11,3 +11,5 @@ csharp_new_line_before_catch = true
 csharp_new_line_before_finally = true
 csharp_space_after_cast = true
 csharp_space_between_method_declaration_name_and_open_parenthesis = false
+
+dotnet_diagnostic.CS8656.severity = error

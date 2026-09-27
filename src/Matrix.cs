@@ -36,6 +36,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Backward
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(M31, M32, M33);
@@ -53,6 +56,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Down
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(-M21, -M22, -M23);
@@ -70,6 +76,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Forward
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(-M31, -M32, -M33);
@@ -98,6 +107,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Left
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(-M11, -M12, -M13);
@@ -115,6 +127,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Right
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(M11, M12, M13);
@@ -132,6 +147,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Translation
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(M41, M42, M43);
@@ -149,6 +167,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Vector3 Up
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Vector3(M21, M22, M23);
@@ -165,6 +186,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -343,6 +367,9 @@ namespace Microsoft.Xna.Framework
 		/// <param name="rotation">Rotation quaternion as an output parameter.</param>
 		/// <param name="translation">Translation vector as an output parameter.</param>
 		/// <returns><c>true</c> if matrix can be decomposed; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Decompose(
 			out Vector3 scale,
 			out Quaternion rotation,
@@ -385,6 +412,9 @@ namespace Microsoft.Xna.Framework
 		/// <returns>Determinant of this <see cref="Matrix"/></returns>
 		/// <remarks>See more about determinant here - http://en.wikipedia.org/wiki/Determinant.
 		/// </remarks>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float Determinant()
 		{
 			float num18 = (M33 * M44) - (M34 * M43);
@@ -408,6 +438,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="other">The <see cref="Matrix"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Equals(Matrix other)
 		{
 			return (	M11 == other.M11 &&
@@ -433,6 +466,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="obj">The <see cref="Object"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override bool Equals(object obj)
 		{
 			return (obj is Matrix) && Equals((Matrix) obj);
@@ -442,6 +478,9 @@ namespace Microsoft.Xna.Framework
 		/// Gets the hash code of this <see cref="Matrix"/>.
 		/// </summary>
 		/// <returns>Hash code of this <see cref="Matrix"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return (
@@ -460,6 +499,9 @@ namespace Microsoft.Xna.Framework
 		/// {M41:[<see cref="M41"/>] M42:[<see cref="M42"/>] M43:[<see cref="M43"/>] M44:[<see cref="M44"/>]}
 		/// </summary>
 		/// <returns>A <see cref="String"/> representation of this <see cref="Matrix"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (
@@ -487,6 +529,9 @@ namespace Microsoft.Xna.Framework
 		#region Internal Methods
 
 		[Conditional("DEBUG")]
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal void CheckForNaNs()
 		{
 			if (	float.IsNaN(M11) ||

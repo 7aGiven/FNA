@@ -80,6 +80,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -168,6 +171,9 @@ namespace Microsoft.Xna.Framework
 		/// Gets the hash code of this <see cref="Vector2"/>.
 		/// </summary>
 		/// <returns>Hash code of this <see cref="Vector2"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return X.GetHashCode() + Y.GetHashCode();
@@ -177,6 +183,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the length of this <see cref="Vector2"/>.
 		/// </summary>
 		/// <returns>The length of this <see cref="Vector2"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float Length()
 		{
 			return (float) Math.Sqrt((X * X) + (Y * Y));
@@ -186,6 +195,9 @@ namespace Microsoft.Xna.Framework
 		/// Returns the squared length of this <see cref="Vector2"/>.
 		/// </summary>
 		/// <returns>The squared length of this <see cref="Vector2"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public float LengthSquared()
 		{
 			return (X * X) + (Y * Y);
@@ -206,6 +218,9 @@ namespace Microsoft.Xna.Framework
 		/// {X:[<see cref="X"/>] Y:[<see cref="Y"/>]}
 		/// </summary>
 		/// <returns>A <see cref="String"/> representation of this <see cref="Vector2"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (
@@ -220,6 +235,9 @@ namespace Microsoft.Xna.Framework
 		#region Internal Methods
 
 		[Conditional("DEBUG")]
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal void CheckForNaNs()
 		{
 			if (float.IsNaN(X) || float.IsNaN(Y))

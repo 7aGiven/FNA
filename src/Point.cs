@@ -46,6 +46,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -95,6 +98,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="other">The <see cref="Point"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Equals(Point other)
 		{
 			return ((X == other.X) && (Y == other.Y));
@@ -105,6 +111,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="obj">The <see cref="Object"/> to compare.</param>
 		/// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override bool Equals(object obj)
 		{
 			return (obj is Point) && Equals((Point) obj);
@@ -114,6 +123,9 @@ namespace Microsoft.Xna.Framework
 		/// Gets the hash code of this <see cref="Point"/>.
 		/// </summary>
 		/// <returns>Hash code of this <see cref="Point"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return X + Y;
@@ -124,6 +136,9 @@ namespace Microsoft.Xna.Framework
 		/// {X:[<see cref="X"/>] Y:[<see cref="Y"/>]}
 		/// </summary>
 		/// <returns><see cref="String"/> representation of this <see cref="Point"/>.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (

@@ -34,6 +34,9 @@ namespace Microsoft.Xna.Framework
 		/// <summary>
 		/// Returns the x coordinate of the left edge of this <see cref="Rectangle"/>.
 		/// </summary>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public int Left
 		{
 			get
@@ -45,6 +48,9 @@ namespace Microsoft.Xna.Framework
 		/// <summary>
 		/// Returns the x coordinate of the right edge of this <see cref="Rectangle"/>.
 		/// </summary>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public int Right
 		{
 			get
@@ -56,6 +62,9 @@ namespace Microsoft.Xna.Framework
 		/// <summary>
 		/// Returns the y coordinate of the top edge of this <see cref="Rectangle"/>.
 		/// </summary>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public int Top
 		{
 			get
@@ -67,6 +76,9 @@ namespace Microsoft.Xna.Framework
 		/// <summary>
 		/// Returns the y coordinate of the bottom edge of this <see cref="Rectangle"/>.
 		/// </summary>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public int Bottom
 		{
 			get
@@ -80,6 +92,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		public Point Location
 		{
+#if NETCOREAPP3_0_OR_GREATER
+			readonly
+#endif
 			get
 			{
 				return new Point(X, Y);
@@ -98,6 +113,9 @@ namespace Microsoft.Xna.Framework
 		/// If <see cref="Width"/> or <see cref="Height"/> is an odd number,
 		/// the center point will be rounded down.
 		/// </remarks>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public Point Center
 		{
 			get
@@ -113,6 +131,9 @@ namespace Microsoft.Xna.Framework
 		/// Whether or not this <see cref="Rectangle"/> has a width and
 		/// height of 0, and a position of (0, 0).
 		/// </summary>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool IsEmpty
 		{
 			get
@@ -143,6 +164,9 @@ namespace Microsoft.Xna.Framework
 
 		#region Internal Properties
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		internal string DebugDisplayString
 		{
 			get
@@ -210,6 +234,9 @@ namespace Microsoft.Xna.Framework
 		/// <param name="x">The x coordinate of the point to check for containment.</param>
 		/// <param name="y">The y coordinate of the point to check for containment.</param>
 		/// <returns><c>true</c> if the provided coordinates lie inside this <see cref="Rectangle"/>. <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Contains(int x, int y)
 		{
 			return (	(this.X <= x) &&
@@ -223,6 +250,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="value">The coordinates to check for inclusion in this <see cref="Rectangle"/>.</param>
 		/// <returns><c>true</c> if the provided <see cref="Point"/> lies inside this <see cref="Rectangle"/>. <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Contains(Point value)
 		{
 			return (	(this.X <= value.X) &&
@@ -236,6 +266,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="value">The <see cref="Rectangle"/> to check for inclusion in this <see cref="Rectangle"/>.</param>
 		/// <returns><c>true</c> if the provided <see cref="Rectangle"/>'s bounds lie entirely inside this <see cref="Rectangle"/>. <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Contains(Rectangle value)
 		{
 			return (	(this.X <= value.X) &&
@@ -244,6 +277,9 @@ namespace Microsoft.Xna.Framework
 					((value.Y + value.Height) <= (this.Y + this.Height))	);
 		}
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public void Contains(ref Point value, out bool result)
 		{
 			result = (	(this.X <= value.X) &&
@@ -252,6 +288,9 @@ namespace Microsoft.Xna.Framework
 					(value.Y < (this.Y + this.Height))	);
 		}
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public void Contains(ref Rectangle value, out bool result)
 		{
 			result = (	(this.X <= value.X) &&
@@ -300,6 +339,9 @@ namespace Microsoft.Xna.Framework
 		/// <c>true</c> if this <see cref="Rectangle"/>'s x coordinate, y coordinate, width, and height
 		/// match the values for the provided <see cref="Rectangle"/>. <c>false</c> otherwise.
 		/// </returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Equals(Rectangle other)
 		{
 			return this == other;
@@ -315,11 +357,17 @@ namespace Microsoft.Xna.Framework
 		/// <see cref="Rectangle"/>'s x coordinate, y coordinate, width, and height
 		/// match the values for the provided <see cref="Rectangle"/>. <c>false</c> otherwise.
 		/// </returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override bool Equals(object obj)
 		{
 			return (obj is Rectangle) && this == ((Rectangle) obj);
 		}
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override string ToString()
 		{
 			return (
@@ -331,6 +379,9 @@ namespace Microsoft.Xna.Framework
 			);
 		}
 
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public override int GetHashCode()
 		{
 			return this.X + this.Y + this.Width + this.Height;
@@ -341,6 +392,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="value">The other rectangle for testing.</param>
 		/// <returns><c>true</c> if other <see cref="Rectangle"/> intersects with this rectangle; <c>false</c> otherwise.</returns>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public bool Intersects(Rectangle value)
 		{
 			return (	value.Left < Right &&
@@ -354,6 +408,9 @@ namespace Microsoft.Xna.Framework
 		/// </summary>
 		/// <param name="value">The other rectangle for testing.</param>
 		/// <param name="result"><c>true</c> if other <see cref="Rectangle"/> intersects with this rectangle; <c>false</c> otherwise. As an output parameter.</param>
+#if NETCOREAPP3_0_OR_GREATER
+		readonly
+#endif
 		public void Intersects(ref Rectangle value, out bool result)
 		{
 			result = (	value.Left < Right &&
