@@ -2,6 +2,39 @@
 {
 	public static class RectangleTest
 	{
+		[Argument(-1, -1, 2, 2, 0, 0)]
+		[Argument(-1, -1, 2, 2, 0, 1)]
+		[Argument(-1, -1, 2, 2, 0, -1)]
+		[Argument(-1, -1, 2, 2, 1, 0)]
+		[Argument(-1, -1, 2, 2, -1, 0)]
+		public static bool Contains(int x, int y, int w, int h, int px, int py)
+		{
+			return new Rectangle(x, y, w, h).Contains(px, py);
+		}
+
+		[Argument(-1, -1, 2, 2, 0, 0)]
+		[Argument(-1, -1, 2, 2, 0, 1)]
+		[Argument(-1, -1, 2, 2, 0, -1)]
+		[Argument(-1, -1, 2, 2, 1, 0)]
+		[Argument(-1, -1, 2, 2, -1, 0)]
+		public static bool ContainsPoint(int x, int y, int w, int h, int px, int py)
+		{
+			return new Rectangle(x, y, w, h).Contains(new Point(px, py));
+		}
+
+		[Argument(-1, -1, 2, 2, 0, 0)]
+		[Argument(-1, -1, 2, 2, 0, 1)]
+		[Argument(-1, -1, 2, 2, 0, -1)]
+		[Argument(-1, -1, 2, 2, 1, 0)]
+		[Argument(-1, -1, 2, 2, -1, 0)]
+		public static bool ContainsPointRef(int x, int y, int w, int h, int px, int py)
+		{
+			bool result;
+			Point point = new Point(x, y);
+			new Rectangle(x, y, w, h).Contains(ref point, out result);
+			return result;
+		}
+
 		[Argument(1, 2, 3, 4, 5, 6, 7, 8)]
 		public static Rectangle Intersect(int x1, int y1, int width1, int height1, int x2, int y2, int width2, int height2)
 		{
