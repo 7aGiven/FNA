@@ -35,6 +35,12 @@ namespace Microsoft.Xna.Framework
 			return color;
 		}
 
+		[Argument(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue)]
+		public static Color FromNonPremultiplied(int r, int g, int b, int a)
+		{
+			return Color.FromNonPremultiplied(r, g, b, a);
+		}
+
 		[Argument(255, 0.4f)]
 		public static Color Multiply(int value, float scale)
 		{

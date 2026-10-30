@@ -93,7 +93,7 @@ namespace Test
 								Console.Error.WriteLine(respose.exception);
 								return;
 							}
-							Check(method, args, result, respose.result);
+							Check(method, args, respose.result, result);
 						}
 						else if (attributeName == "TestExceptionAttribute")
 						{
