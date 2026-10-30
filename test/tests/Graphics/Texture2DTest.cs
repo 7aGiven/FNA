@@ -4,6 +4,12 @@ namespace Microsoft.Xna.Framework.Graphics
 {
 	public static class Texture2DTest
 	{
+		struct RGB
+		{
+			byte r;
+			byte g;
+			byte b;
+		}
 		class SeekStream : Stream
 		{
 			readonly bool canSeek;
@@ -65,6 +71,74 @@ namespace Microsoft.Xna.Framework.Graphics
 			Assert.Throw(() => { Texture2D.FromStream(gd, new SeekStream(false), 1, 1, false).Dispose(); });
 			Assert.Throw(() => { Texture2D.FromStream(gd, new SeekStream(true), 0, 1, false).Dispose(); });
 			Assert.Throw(() => { Texture2D.FromStream(gd, new SeekStream(true), 1, 0, false).Dispose(); });
+		}
+
+		[TestException]
+		public static void GetData()
+		{
+			GraphicsDevice gd = GameTest.gdm.GraphicsDevice;
+			Texture2D texture;
+			Color[] colors = new Color[1];
+			long[] ls = new long[1];
+			RGB[] rgb = new RGB[1];
+			using (texture = new Texture2D(gd, 4, 8, true, SurfaceFormat.Color))
+			{
+				Assert.Throw(() => { texture.GetData(4, new Rectangle(-1, -1, 0, 0), new Color[0], -1, 0); });
+
+				Assert.Throw(() => { texture.GetData(4, new Rectangle(-1, -1, 0, 0), ls, -1, 0); });
+
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), ls, 0, 0); });
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), ls, -1, 1); });
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), ls, 2, 1); });
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), ls, 1, 1); });
+
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), ls, 0, 1); });
+				Assert.Throw(() => { texture.GetData(3, new Rectangle(-1, -1, 0, 0), rgb, 0, 1); });
+
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, 0, 1, 0), colors, 0, 1); });
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, 0, 0, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(-1, 0, 1, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, -1, 1, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, 0, 2, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, 0, 1, 3), colors, 0, 1); });
+
+				Assert.Throw(() => { texture.GetData(2, new Rectangle(0, 0, 1, 2), colors, 0, 1); });
+			}
+			Assert.Throw(() => { texture.GetData<Color>(null); });
+		}
+
+		[TestException]
+		public static void SetData()
+		{
+			GraphicsDevice gd = GameTest.gdm.GraphicsDevice;
+			Texture2D texture;
+			Color[] colors = new Color[1];
+			long[] ls = new long[1];
+			RGB[] rgb = new RGB[1];
+			using (texture = new Texture2D(gd, 4, 8, true, SurfaceFormat.Color))
+			{
+				Assert.Throw(() => { texture.SetData(4, new Rectangle(-1, -1, 0, 0), new Color[0], -1, 0); });
+
+				Assert.Throw(() => { texture.SetData(4, new Rectangle(-1, -1, 0, 0), ls, -1, 0); });
+
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), ls, 0, 0); });
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), ls, -1, 1); });
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), ls, 2, 1); });
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), ls, 1, 1); });
+
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), ls, 0, 1); });
+				Assert.Throw(() => { texture.SetData(3, new Rectangle(-1, -1, 0, 0), rgb, 0, 1); });
+
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, 0, 1, 0), colors, 0, 1); });
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, 0, 0, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(-1, 0, 1, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, -1, 1, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, 0, 2, 1), colors, 0, 1); });
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, 0, 1, 3), colors, 0, 1); });
+
+				Assert.Throw(() => { texture.SetData(2, new Rectangle(0, 0, 1, 2), colors, 0, 1); });
+			}
+			Assert.Throw(() => { texture.SetData<Color>(null); });
 		}
 	}
 }
