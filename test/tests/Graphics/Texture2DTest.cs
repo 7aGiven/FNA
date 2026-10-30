@@ -83,7 +83,7 @@ namespace Microsoft.Xna.Framework.Graphics
 			RGB[] rgb = new RGB[1];
 			using (texture = new Texture2D(gd, 4, 8, true, SurfaceFormat.Color))
 			{
-				Assert.Throw(() => { texture.GetData(4, new Rectangle(-1, -1, 0, 0), new Color[0], -1, 0); });
+				Assert.Throw(() => { texture.GetData(4, new Rectangle(-1, -1, 0, 0), new long[0], -1, 0); });
 
 				Assert.Throw(() => { texture.GetData(4, new Rectangle(-1, -1, 0, 0), ls, -1, 0); });
 
@@ -117,7 +117,7 @@ namespace Microsoft.Xna.Framework.Graphics
 			RGB[] rgb = new RGB[1];
 			using (texture = new Texture2D(gd, 4, 8, true, SurfaceFormat.Color))
 			{
-				Assert.Throw(() => { texture.SetData(4, new Rectangle(-1, -1, 0, 0), new Color[0], -1, 0); });
+				Assert.Throw(() => { texture.SetData(4, new Rectangle(-1, -1, 0, 0), new long[0], -1, 0); });
 
 				Assert.Throw(() => { texture.SetData(4, new Rectangle(-1, -1, 0, 0), ls, -1, 0); });
 
