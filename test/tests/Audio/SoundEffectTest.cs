@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Microsoft.Xna.Framework.Audio
 {
@@ -72,6 +73,26 @@ namespace Microsoft.Xna.Framework.Audio
 				writer.BaseStream.Position = 0;
 				Assert.Throw(() => { SoundEffect.FromStream(writer.BaseStream).Dispose(); });
 			}
+		}
+
+		[TestException]
+		public static void GetSampleDuration()
+		{
+			Assert.Throw(() => { SoundEffect.GetSampleDuration(-1, -1, 0); });
+			Assert.Throw(() => { SoundEffect.GetSampleDuration(0, -1, AudioChannels.Mono); });
+			Assert.Throw(() => { SoundEffect.GetSampleDuration(0, 44100, 0); });
+			Assert.Throw(() => { SoundEffect.GetSampleDuration(0, 44100, (AudioChannels) 3); });
+		}
+
+		[TestException]
+		public static void GetSampleSizeInBytes()
+		{
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(-1), 44100, AudioChannels.Mono); });
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(int.MaxValue * TimeSpan.TicksPerMillisecond + 1), 44100, AudioChannels.Mono); });
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(int.MaxValue * TimeSpan.TicksPerMillisecond), 44100, AudioChannels.Mono); });
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(1), 0, AudioChannels.Mono); });
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(1), 44100, 0); });
+			Assert.Throw(() => { SoundEffect.GetSampleSizeInBytes(new TimeSpan(1), 44100, (AudioChannels) 3); });
 		}
 	}
 }
