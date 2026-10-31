@@ -475,11 +475,15 @@ namespace Microsoft.Xna.Framework.Audio
 					throw new ArgumentException("Vorbis load failed:" + error);
 				}
 				FAudio.stb_vorbis_info info = FAudio.stb_vorbis_get_info(vorbis);
-				int num_floats = info.channels * (int) FAudio.stb_vorbis_stream_length_in_samples(vorbis);
+				nChannels = (ushort) info.channels;
+				nSamplesPerSec = info.sample_rate;
+				nBlockAlign = (ushort) (4 * nChannels);
+				int num_floats = nChannels * (int) FAudio.stb_vorbis_stream_length_in_samples(vorbis);
 				IntPtr f32Buffer = FNAPlatform.Malloc(4 * num_floats);
-				FAudio.stb_vorbis_get_samples_float_interleaved(vorbis, info.channels, f32Buffer, num_floats);
+				FAudio.stb_vorbis_get_samples_float_interleaved(vorbis, nChannels, f32Buffer, num_floats);
 				FAudio.stb_vorbis_close(vorbis);
-				return new SoundEffect().Init(null, f32Buffer, 4 * num_floats, null, 3, (ushort) info.channels, info.sample_rate, (uint) ((int) info.sample_rate * 4 * info.channels), (ushort) (4 * info.channels), sizeof(float), 0, 0);
+
+				return new SoundEffect().Init(null, f32Buffer, 4 * num_floats, null, 3, nChannels, nSamplesPerSec, nSamplesPerSec * nBlockAlign, nBlockAlign, 32, 0, 0);
 			}
 			// RIFF Signature
 			if (signature != "RIFF")
