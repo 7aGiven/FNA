@@ -17,6 +17,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 
 using Microsoft.Xna.Framework.Design;
+#if !NETCOREAPP2_0_OR_GREATER
+using MathF = System.Math;
+#endif
 #endregion
 
 namespace Microsoft.Xna.Framework
@@ -356,9 +359,9 @@ namespace Microsoft.Xna.Framework
 			float ys = (Math.Sign(M21 * M22 * M23 * M24) < 0) ? -1 : 1;
 			float zs = (Math.Sign(M31 * M32 * M33 * M34) < 0) ? -1 : 1;
 
-			scale.X = xs * MathF.Sqrt(M11 * M11 + M12 * M12 + M13 * M13);
-			scale.Y = ys * MathF.Sqrt(M21 * M21 + M22 * M22 + M23 * M23);
-			scale.Z = zs * MathF.Sqrt(M31 * M31 + M32 * M32 + M33 * M33);
+			scale.X = xs * (float) MathF.Sqrt(M11 * M11 + M12 * M12 + M13 * M13);
+			scale.Y = ys * (float) MathF.Sqrt(M21 * M21 + M22 * M22 + M23 * M23);
+			scale.Z = zs * (float) MathF.Sqrt(M31 * M31 + M32 * M32 + M33 * M33);
 
 			if (	MathHelper.WithinEpsilon(scale.X, 0.0f) ||
 				MathHelper.WithinEpsilon(scale.Y, 0.0f) ||
@@ -624,7 +627,7 @@ namespace Microsoft.Xna.Framework
 			{
 				Vector3.Multiply(
 					ref cameraDir,
-					1f / MathF.Sqrt(num),
+					1f / (float) MathF.Sqrt(num),
 					out cameraDir
 				);
 			}
@@ -712,7 +715,7 @@ namespace Microsoft.Xna.Framework
 			{
 				Vector3.Multiply(
 					ref vector2,
-					1f / MathF.Sqrt(num2),
+					1f / (float) MathF.Sqrt(num2),
 					out vector2
 				);
 			}
@@ -803,8 +806,8 @@ namespace Microsoft.Xna.Framework
 			float x = axis.X;
 			float y = axis.Y;
 			float z = axis.Z;
-			float num2 = MathF.Sin(angle);
-			float num = MathF.Cos(angle);
+			float num2 = (float) MathF.Sin(angle);
+			float num = (float) MathF.Cos(angle);
 			float num11 = x * x;
 			float num10 = y * y;
 			float num9 = z * z;
@@ -1200,7 +1203,7 @@ namespace Microsoft.Xna.Framework
 			{
 				throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
 			}
-			float num = 1f / MathF.Tan(fieldOfView * 0.5f);
+			float num = 1f / (float) MathF.Tan(fieldOfView * 0.5f);
 			float num9 = num / aspectRatio;
 			result.M11 = num9;
 			result.M12 = result.M13 = result.M14 = 0;
@@ -1314,8 +1317,8 @@ namespace Microsoft.Xna.Framework
 		{
 			result = Matrix.Identity;
 
-			float val1 = MathF.Cos(radians);
-			float val2 = MathF.Sin(radians);
+			float val1 = (float) MathF.Cos(radians);
+			float val2 = (float) MathF.Sin(radians);
 
 			result.M22 = val1;
 			result.M23 = val2;
@@ -1344,8 +1347,8 @@ namespace Microsoft.Xna.Framework
 		{
 			result = Matrix.Identity;
 
-			float val1 = MathF.Cos(radians);
-			float val2 = MathF.Sin(radians);
+			float val1 = (float) MathF.Cos(radians);
+			float val2 = (float) MathF.Sin(radians);
 
 			result.M11 = val1;
 			result.M13 = -val2;
@@ -1374,8 +1377,8 @@ namespace Microsoft.Xna.Framework
 		{
 			result = Matrix.Identity;
 
-			float val1 = MathF.Cos(radians);
-			float val2 = MathF.Sin(radians);
+			float val1 = (float) MathF.Cos(radians);
+			float val2 = (float) MathF.Sin(radians);
 
 			result.M11 = val1;
 			result.M12 = val2;

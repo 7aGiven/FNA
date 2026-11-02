@@ -17,6 +17,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 
 using Microsoft.Xna.Framework.Design;
+#if !NETCOREAPP2_0_OR_GREATER
+using MathF = System.Math;
+#endif
 #endregion
 
 namespace Microsoft.Xna.Framework

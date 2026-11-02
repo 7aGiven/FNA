@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+#if !NETCOREAPP2_0_OR_GREATER
+using MathF = System.Math;
+#endif
 #endregion
 
 namespace Microsoft.Xna.Framework.Graphics
@@ -458,8 +461,8 @@ namespace Microsoft.Xna.Framework.Graphics
 				color,
 				origin.X / sourceW / (float) texture.Width,
 				origin.Y / sourceH / (float) texture.Height,
-				MathF.Sin(rotation),
-				MathF.Cos(rotation),
+				(float) MathF.Sin(rotation),
+				(float) MathF.Cos(rotation),
 				layerDepth,
 				(int) (effects & (SpriteEffects) 0x03)
 			);
@@ -515,8 +518,8 @@ namespace Microsoft.Xna.Framework.Graphics
 				color,
 				origin.X / sourceW / (float) texture.Width,
 				origin.Y / sourceH / (float) texture.Height,
-				MathF.Sin(rotation),
-				MathF.Cos(rotation),
+				(float) MathF.Sin(rotation),
+				(float) MathF.Cos(rotation),
 				layerDepth,
 				(int) (effects & (SpriteEffects) 0x03)
 			);
@@ -635,8 +638,8 @@ namespace Microsoft.Xna.Framework.Graphics
 				color,
 				origin.X / sourceW / (float) texture.Width,
 				origin.Y / sourceH / (float) texture.Height,
-				MathF.Sin(rotation),
-				MathF.Cos(rotation),
+				(float) MathF.Sin(rotation),
+				(float) MathF.Cos(rotation),
 				layerDepth,
 				(int) (effects & (SpriteEffects) 0x03)
 			);
@@ -840,8 +843,8 @@ namespace Microsoft.Xna.Framework.Graphics
 					color,
 					offsetX / sourceW / (float) textureValue.Width,
 					offsetY / sourceH / (float) textureValue.Height,
-					MathF.Sin(rotation),
-					MathF.Cos(rotation),
+					(float) MathF.Sin(rotation),
+					(float) MathF.Cos(rotation),
 					layerDepth,
 					(int) effects
 				);
@@ -1036,8 +1039,8 @@ namespace Microsoft.Xna.Framework.Graphics
 					color,
 					offsetX / sourceW / (float) textureValue.Width,
 					offsetY / sourceH / (float) textureValue.Height,
-					MathF.Sin(rotation),
-					MathF.Cos(rotation),
+					(float) MathF.Sin(rotation),
+					(float) MathF.Cos(rotation),
 					layerDepth,
 					(int) effects
 				);

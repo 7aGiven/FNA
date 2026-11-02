@@ -18,6 +18,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 
 using Microsoft.Xna.Framework.Design;
+#if !NETCOREAPP2_0_OR_GREATER
+using MathF = System.Math;
+#endif
 #endregion
 
 namespace Microsoft.Xna.Framework
@@ -91,7 +94,7 @@ namespace Microsoft.Xna.Framework
 			sphere.Center = Vector3.Transform(this.Center, matrix);
 			sphere.Radius = this.Radius *
 				(
-					MathF.Sqrt(Math.Max(
+					(float) MathF.Sqrt(Math.Max(
 						((matrix.M11 * matrix.M11) + (matrix.M12 * matrix.M12)) + (matrix.M13 * matrix.M13),
 						Math.Max(
 							((matrix.M21 * matrix.M21) + (matrix.M22 * matrix.M22)) + (matrix.M23 * matrix.M23),
@@ -112,7 +115,7 @@ namespace Microsoft.Xna.Framework
 			result.Center = Vector3.Transform(this.Center, matrix);
 			result.Radius = this.Radius *
 				(
-					MathF.Sqrt(Math.Max(
+					(float) MathF.Sqrt(Math.Max(
 						((matrix.M11 * matrix.M11) + (matrix.M12 * matrix.M12)) + (matrix.M13 * matrix.M13),
 						Math.Max(
 							((matrix.M21 * matrix.M21) + (matrix.M22 * matrix.M22)) + (matrix.M23 * matrix.M23),
@@ -451,7 +454,7 @@ namespace Microsoft.Xna.Framework
 				float sqDist = diff.LengthSquared();
 				if (sqDist > sqRadius)
 				{
-					float distance = MathF.Sqrt(sqDist); // equal to diff.Length();
+					float distance = (float) MathF.Sqrt(sqDist); // equal to diff.Length();
 					Vector3 direction = diff / distance;
 					Vector3 G = center - radius * direction;
 					center = (G + pt) / 2;
