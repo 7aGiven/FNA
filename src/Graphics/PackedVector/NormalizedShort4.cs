@@ -115,39 +115,26 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static ulong Pack(float x, float y, float z, float w)
 		{
-			const float max = 0x7FFF;
-			const float min = -max;
+			if (x < -1f) x = -1f;
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * short.MaxValue);
 
-			ulong word4 = (
-				(ulong) MathHelper.Clamp(
-					(float) Math.Round(x * max),
-					min,
-					max
-				) & 0xFFFF
+			if (y < -1f) y = -1f;
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * short.MaxValue);
+
+			if (z < -1f) z = -1f;
+			if (z > 1f) z = 1f;
+			int iz = MathHelper.Round(z * short.MaxValue);
+
+			if (w < -1f) w = -1f;
+			if (w > 1f) w = 1f;
+			int iw = MathHelper.Round(w * short.MaxValue);
+
+			return (
+				(ulong) (uint) ((ushort) ix | iy << 16) |
+				(ulong) (uint) ((ushort) iz | iw << 16) << 32
 			);
-			ulong word3 = (
-				(ulong) MathHelper.Clamp(
-					(float) Math.Round(y * max),
-					min,
-					max
-				) & 0xFFFF
-			) << 0x10;
-			ulong word2 = (
-				(ulong) MathHelper.Clamp(
-					(float) Math.Round(z * max),
-					min,
-					max
-				) & 0xFFFF
-			) << 0x20;
-			ulong word1 = (
-				(ulong) MathHelper.Clamp(
-					(float) Math.Round(w * max),
-					min,
-					max
-				) & 0xFFFF
-			) << 0x30;
-
-			return (word4 | word3 | word2 | word1);
 		}
 
 		#endregion

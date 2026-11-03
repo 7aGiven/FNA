@@ -116,18 +116,15 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static ushort Pack(float x, float y)
 		{
-			int byte2 = (
-				((ushort)
-					Math.Round(MathHelper.Clamp(x, -1.0f, 1.0f) * 127.0f)
-				)
-			) & 0x00FF;
-			int byte1 = (
-				((ushort)
-					Math.Round(MathHelper.Clamp(y, -1.0f, 1.0f) * 127.0f)
-				) << 8
-			) & 0xFF00;
+			if (x < -1f) x = -1f;
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * sbyte.MaxValue);
 
-			return (ushort) (byte2 | byte1);
+			if (y < -1f) y = -1f;
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * sbyte.MaxValue);
+
+			return (ushort) ((ushort) ix | iy << 8);
 		}
 
 		#endregion

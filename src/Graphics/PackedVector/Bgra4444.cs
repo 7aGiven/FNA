@@ -159,12 +159,23 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static ushort Pack(float x, float y, float z, float w)
 		{
-			return (ushort) (
-				(((ushort) Math.Round(MathHelper.Clamp(x, 0, 1) * 15.0f)) << 8) |
-				(((ushort) Math.Round(MathHelper.Clamp(y, 0, 1) * 15.0f)) << 4) |
-				((ushort) Math.Round(MathHelper.Clamp(z, 0, 1) * 15.0f)) |
-				(((ushort) Math.Round(MathHelper.Clamp(w, 0, 1) * 15.0f)) << 12)
-			);
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * 15f);
+			if (ix < 0) ix = 0;
+
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * 15f);
+			if (iy < 0) iy = 0;
+
+			if (z > 1f) z = 1f;
+			int iz = MathHelper.Round(z * 15f);
+			if (iz < 0) iz = 0;
+
+			if (w > 1f) w = 1f;
+			int iw = MathHelper.Round(w * 15f);
+			if (iw < 0) iw = 0;
+
+			return (ushort) (ix << 8 | iy << 4 | iz | iw << 12);
 		}
 
 		#endregion

@@ -154,9 +154,10 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static byte Pack(float alpha)
 		{
-			return (byte) Math.Round(
-				MathHelper.Clamp(alpha, 0, 1) * 255.0f
-			);
+			if (alpha > 1f) alpha = 1f;
+			int result = MathHelper.Round(alpha * byte.MaxValue);
+			if (result < 0) result = 0;
+			return (byte) result;
 		}
 
 		#endregion

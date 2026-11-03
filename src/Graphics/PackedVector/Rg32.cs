@@ -164,10 +164,15 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static uint Pack(float x, float y)
 		{
-			return (uint) (
-				((uint) Math.Round(MathHelper.Clamp(x, 0, 1) * 65535.0f)) |
-				(((uint) Math.Round(MathHelper.Clamp(y, 0, 1) * 65535.0f)) << 16)
-			);
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * ushort.MaxValue);
+			if (ix < 0) ix = 0;
+
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * ushort.MaxValue);
+			if (iy < 0) iy = 0;
+
+			return (uint) (ix | iy << 16);
 		}
 
 		#endregion

@@ -159,12 +159,23 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static uint Pack(float x, float y, float z, float w)
 		{
-			return (uint) (
-				((uint) Math.Round(MathHelper.Clamp(x, 0, 1) * 1023.0f)) |
-				((uint) Math.Round(MathHelper.Clamp(y, 0, 1) * 1023.0f) << 10) |
-				((uint) Math.Round(MathHelper.Clamp(z, 0, 1) * 1023.0f) << 20) |
-				((uint) Math.Round(MathHelper.Clamp(w, 0, 1) * 3.0f) << 30)
-			);
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * 1023f);
+			if (ix < 0) ix = 0;
+
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * 1023f);
+			if (iy < 0) iy = 0;
+
+			if (z > 1f) z = 1f;
+			int iz = MathHelper.Round(z * 1023f);
+			if (iz < 0) iz = 0;
+
+			if (w > 1f) w = 1f;
+			int iw = MathHelper.Round(w * 3f);
+			if (iw < 0) iw = 0;
+
+			return (uint) (ix | iy << 10 | iz << 20 | iw << 30);
 		}
 
 		#endregion

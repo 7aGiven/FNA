@@ -118,25 +118,15 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static uint Pack(float x, float y)
 		{
-			const float max = 0x7FFF;
-			const float min = -max;
+			if (x < -1f) x = -1f;
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * short.MaxValue);
 
-			uint word2 = (uint) (
-				(int) MathHelper.Clamp(
-					(float) Math.Round(x * max),
-					min,
-					max
-				) & 0xFFFF
-			);
-			uint word1 = (uint) ((
-				(int) MathHelper.Clamp(
-					(float) Math.Round(y * max),
-					min,
-					max
-				) & 0xFFFF
-			) << 0x10);
+			if (y < -1f) y = -1f;
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * short.MaxValue);
 
-			return (word2 | word1);
+			return (uint) ((ushort) ix | iy << 16);
 		}
 
 		#endregion

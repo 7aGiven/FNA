@@ -184,12 +184,23 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 		/// <returns>The ulong containing the packed values.</returns>
 		static uint Pack(float x, float y, float z, float w)
 		{
-			return (uint) (
-				((uint) Math.Round(MathHelper.Clamp(x, 0, 255))) |
-				((uint) Math.Round(MathHelper.Clamp(y, 0, 255)) << 8) |
-				((uint) Math.Round(MathHelper.Clamp(z, 0, 255)) << 16) |
-				((uint) Math.Round(MathHelper.Clamp(w, 0, 255)) << 24)
-			);
+			if (x > byte.MaxValue) x = byte.MaxValue;
+			int ix = MathHelper.Round(x);
+			if (ix < 0) ix = 0;
+
+			if (y > byte.MaxValue) y = byte.MaxValue;
+			int iy = MathHelper.Round(y);
+			if (iy < 0) iy = 0;
+
+			if (z > byte.MaxValue) z = byte.MaxValue;
+			int iz = MathHelper.Round(z);
+			if (iz < 0) iz = 0;
+
+			if (w > byte.MaxValue) w = byte.MaxValue;
+			int iw = MathHelper.Round(w);
+			if (iw < 0) iw = 0;
+
+			return (uint) (ix | iy << 8 | iz << 16 | iw << 24);
 		}
 
 		#endregion

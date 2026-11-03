@@ -184,11 +184,25 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 		/// <returns>The ulong containing the packed values.</returns>
 		static ulong Pack(float x, float y, float z, float w)
 		{
-			return (ulong) (
-				((long) Math.Round(MathHelper.Clamp(x, -32768, 32767)) & 0xFFFF ) |
-				(((long) Math.Round(MathHelper.Clamp(y, -32768, 32767)) << 16) & 0xFFFF0000) |
-				(((long) Math.Round(MathHelper.Clamp(z, -32768, 32767)) << 32) & 0xFFFF00000000) |
-				((long) Math.Round(MathHelper.Clamp(w, -32768, 32767)) << 48)
+			if (x < short.MinValue) x = short.MinValue;
+			if (x > short.MaxValue) x = short.MaxValue;
+			int ix = MathHelper.Round(x);
+
+			if (y < short.MinValue) y = short.MinValue;
+			if (y > short.MaxValue) y = short.MaxValue;
+			int iy = MathHelper.Round(y);
+
+			if (z < short.MinValue) z = short.MinValue;
+			if (z > short.MaxValue) z = short.MaxValue;
+			int iz = MathHelper.Round(z);
+
+			if (w < short.MinValue) w = short.MinValue;
+			if (w > short.MaxValue) w = short.MaxValue;
+			int iw = MathHelper.Round(w);
+
+			return (
+				(ulong) (uint) ((ushort) ix | iy << 16) |
+				(ulong) (uint) ((ushort) iz | iw << 16) << 32
 			);
 		}
 

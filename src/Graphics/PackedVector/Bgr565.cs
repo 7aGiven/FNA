@@ -166,11 +166,19 @@ namespace Microsoft.Xna.Framework.Graphics.PackedVector
 
 		private static ushort Pack(float x, float y, float z)
 		{
-			return (ushort) (
-				(((ushort) Math.Round(MathHelper.Clamp(x, 0, 1) * 31.0f)) << 11) |
-				(((ushort) Math.Round(MathHelper.Clamp(y, 0, 1) * 63.0f)) << 5) |
-				((ushort) Math.Round(MathHelper.Clamp(z, 0, 1) * 31.0f))
-			);
+			if (x > 1f) x = 1f;
+			int ix = MathHelper.Round(x * 31f);
+			if (ix < 0) ix = 0;
+
+			if (y > 1f) y = 1f;
+			int iy = MathHelper.Round(y * 63f);
+			if (iy < 0) iy = 0;
+
+			if (z > 1f) z = 1f;
+			int iz = MathHelper.Round(z * 31f);
+			if (iz < 0) iz = 0;
+
+			return (ushort) (ix << 11 | iy << 5 | iz);
 		}
 
 		#endregion
